@@ -1,91 +1,142 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Heritage House Price Predictor - ML
 
-## Template Instructions
+*Image & live link placeholder*
 
-Welcome,
+## Overview
 
-This is the Code Institute student template for the Heritage Housing project option in Predictive Analytics. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+The Heritage House Price Predictor is a data-driven project developed to help a client determine accurate sale prices for a set of inherited homes in **Ames, Iowa**. The primary aim is to estimate the total expected value of these properties and to understand how specific features—such as location, size, and condition—impact their market price.
 
-You can safely delete the Template Instructions section of this README.md file,  and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+Using a combination of **data analysis**, **machine learning**, and **interactive visualisation**, this project delivers actionable insights through a **Streamlit web application** (deployed via Render or Heroku). The user-friendly interface allows the client to explore predictions, input their own property values, and understand the model’s logic in real time.
 
-## How to use this repo
+The project follows the **CRISP-DM (Cross Industry Standard Process for Data Mining)** methodology. This structured approach ensures that the workflow—from understanding business needs to evaluating predictive models—is transparent and repeatable.
 
-1. Use this template to create your GitHub project repo
-
-2. In your new repo click on the green Code button
-
-3. Then, from the Codespaces tab, click Create codespace on main.
-
-5. Wait for the workspace to open. This can take a few minutes.
-
-6. Open a new terminal and `pip3 install -r requirements.txt`
-
-7. Open the jupyter_notebooks directory and click on the notebook you want to open.
-
-8. Click the kernel button and choose Python Environments.
-
-Note that the kernel says Python 3.12.1 as it inherits from the workspace so it will be Python-3.12.1 as installed by Codespaces. To confirm this you can use `! python --version` in a notebook code cell.
-
-## Cloud IDE Reminders
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In your Cloud IDE, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with *Regenerate API Key*.
+---
 
 ## Dataset Content
 
-* The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data). We then created a fictitious user story where predictive analytics can be applied in a real project in the workplace.
-* The dataset has almost 1.5 thousand rows and represents housing records from Ames, Iowa, indicating house profile (Floor Area, Basement, Garage, Kitchen, Lot, Porch, Wood Deck, Year Built) and its respective sale price for houses built between 1872 and 2010.
+The dataset is sourced from **[Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data)** and has been adapted to fit a fictional real-world scenario in which predictive analytics is used to support a property decision.
 
-|Variable|Meaning|Units|
-|:----|:----|:----|
-|1stFlrSF|First Floor square feet|334 - 4692|
-|2ndFlrSF|Second-floor square feet|0 - 2065|
-|BedroomAbvGr|Bedrooms above grade (does NOT include basement bedrooms)|0 - 8|
-|BsmtExposure|Refers to walkout or garden level walls|Gd: Good Exposure; Av: Average Exposure; Mn: Minimum Exposure; No: No Exposure; None: No Basement|
-|BsmtFinType1|Rating of basement finished area|GLQ: Good Living Quarters; ALQ: Average Living Quarters; BLQ: Below Average Living Quarters; Rec: Average Rec Room; LwQ: Low Quality; Unf: Unfinshed; None: No Basement|
-|BsmtFinSF1|Type 1 finished square feet|0 - 5644|
-|BsmtUnfSF|Unfinished square feet of basement area|0 - 2336|
-|TotalBsmtSF|Total square feet of basement area|0 - 6110|
-|GarageArea|Size of garage in square feet|0 - 1418|
-|GarageFinish|Interior finish of the garage|Fin: Finished; RFn: Rough Finished; Unf: Unfinished; None: No Garage|
-|GarageYrBlt|Year garage was built|1900 - 2010|
-|GrLivArea|Above grade (ground) living area square feet|334 - 5642|
-|KitchenQual|Kitchen quality|Ex: Excellent; Gd: Good; TA: Typical/Average; Fa: Fair; Po: Poor|
-|LotArea| Lot size in square feet|1300 - 215245|
-|LotFrontage| Linear feet of street connected to property|21 - 313|
-|MasVnrArea|Masonry veneer area in square feet|0 - 1600|
-|EnclosedPorch|Enclosed porch area in square feet|0 - 286|
-|OpenPorchSF|Open porch area in square feet|0 - 547|
-|OverallCond|Rates the overall condition of the house|10: Very Excellent; 9: Excellent; 8: Very Good; 7: Good; 6: Above Average; 5: Average; 4: Below Average; 3: Fair; 2: Poor; 1: Very Poor|
-|OverallQual|Rates the overall material and finish of the house|10: Very Excellent; 9: Excellent; 8: Very Good; 7: Good; 6: Above Average; 5: Average; 4: Below Average; 3: Fair; 2: Poor; 1: Very Poor|
-|WoodDeckSF|Wood deck area in square feet|0 - 736|
-|YearBuilt|Original construction date|1872 - 2010|
-|YearRemodAdd|Remodel date (same as construction date if no remodelling or additions)|1950 - 2010|
-|SalePrice|Sale Price|34900 - 755000|
+The dataset contains approximately **1,460 housing records** from Ames, Iowa, with information on home features (e.g. floor area, year built, garage) and the corresponding **sale price**. The homes range in build year from **1872 to 2010**.
+
+Here are a few key variables:
+
+| Variable         | Meaning                                              | Range/Values                         |
+|------------------|------------------------------------------------------|--------------------------------------|
+| `GrLivArea`      | Above ground living area (sq ft)                    | 334 - 5642                           |
+| `TotalBsmtSF`    | Total basement area (sq ft)                         | 0 - 6110                             |
+| `GarageArea`     | Size of garage (sq ft)                              | 0 - 1418                             |
+| `OverallQual`    | Overall quality of materials and finish             | 1 (Very Poor) - 10 (Very Excellent) |
+| `YearBuilt`      | Year the house was originally built                 | 1872 - 2010                          |
+| `YearRemodAdd`   | Year of last renovation                             | 1950 - 2010                          |
+| `SalePrice`      | Sale price of the property                          | \$34,900 - \$755,000                |
+
+Additional features include porch size, lot area, kitchen quality, and garage details.
+
+---
 
 ## Business Requirements
 
-As a good friend, you are requested by your friend, who has received an inheritance from a deceased great-grandfather located in Ames, Iowa, to  help in maximising the sales price for the inherited properties.
+Your friend has inherited four homes in Ames, Iowa, from her late great-grandfather. While she understands property values well in her home state, she is concerned that relying on that knowledge in a different location could lead to **inaccurate appraisals**.
 
-Although your friend has an excellent understanding of property prices in her own state and residential area, she fears that basing her estimates for property worth on her current knowledge might lead to inaccurate appraisals. What makes a house desirable and valuable where she comes from might not be the same in Ames, Iowa. She found a public dataset with house prices for Ames, Iowa, and will provide you with that.
+She found a **public dataset of Ames house sales** and has asked you, as a good friend with data skills, to help her make better-informed decisions about selling the inherited properties.
 
-* 1 - The client is interested in discovering how the house attributes correlate with the sale price. Therefore, the client expects data visualisations of the correlated variables against the sale price to show that.
-* 2 - The client is interested in predicting the house sale price from her four inherited houses and any other house in Ames, Iowa.
+### Summary of Client Requirements
 
-## Hypothesis and how to validate?
+1. **Correlation Analysis:**  
+   The client wants to understand how house features correlate with sale price. She expects **data visualisations** to help identify which features (e.g., size, age, quality) are most influential.
 
-* List here your project hypothesis(es) and how you envision validating it (them).
+2. **Price Prediction Model:**  
+   The client wants to **predict the sale price** of her four inherited homes and be able to predict prices for **other homes** in Ames using a trained machine learning model.
 
-## The rationale to map the business requirements to the Data Visualisations and ML tasks
+---
 
-* List your business requirements and a rationale to map them to the Data Visualisations and ML tasks.
+## Hypothesis and How to Validate (Simple Version)
+
+1 - We suspect that larger houses tend to sell for higher prices.  
+A correlation study between `GrLivArea` (above-ground living area) and `SalePrice` will help investigate this.
+
+2 - We believe that houses with higher quality ratings are more valuable.  
+A correlation study between `OverallQual` and `SalePrice` will help investigate this.
+
+3 - We suspect that newer or recently renovated houses sell for more.  
+A correlation study between `YearBuilt`, `YearRemodAdd`, and `SalePrice` will help investigate this.
+
+---
+
+## Hypotheses and How to Validate Them (Expanded Version)
+
+To help the client understand what drives house prices in Ames, Iowa, I formulated three simple hypotheses based on initial observations and domain knowledge. These are designed to be tested through data visualisation and correlation analysis.
+
+### Hypothesis 1: Bigger Houses Sell for More
+
+**H0 (Null Hypothesis):** There is no significant relationship between house size and sale price.  
+**H1 (Alternative Hypothesis):** Larger houses (e.g., higher above-ground living area) tend to have higher sale prices.
+
+**How to Validate:**
+
+- Use a scatter plot to visualise `GrLivArea` vs `SalePrice`.
+- Calculate correlation coefficients (Pearson and Spearman).
+
+---
+
+### Hypothesis 2: Higher Quality Means Higher Price
+
+**H0:** There is no relationship between the overall quality rating and sale price.  
+**H1:** Houses with higher `OverallQual` tend to sell for more.
+
+**How to Validate:**
+
+- Use a boxplot to compare `OverallQual` levels against `SalePrice`.
+- Calculate correlation between `OverallQual` and `SalePrice`.
+
+---
+
+### Hypothesis 3: Newer or Renovated Homes Are Worth More
+
+**H0:** The construction year or year of renovation has no effect on sale price.  
+**H1:** Newer houses or recently renovated homes tend to sell for higher prices.
+
+**How to Validate:**
+
+- Create scatter plots for `YearBuilt` and `YearRemodAdd` vs `SalePrice`.
+- Compare average sale prices by decade.
+- Perform correlation analysis to assess significance.
+
+---
+
+## Rationale to Map the Business Requirements to Data Visualisations and ML Tasks
+
+To address the client’s goal of maximising the sale price of the inherited homes, this project translates each business requirement into actionable data analysis and machine learning tasks.
+
+### Business Requirement 1: Understand How House Attributes Influence Sale Price
+
+**Client Expectation:**  
+Identify which house features most influence the sale price through clear, informative visualisations.
+
+**Mapped Tasks:**
+
+- Load, clean, and explore the Ames housing dataset.
+- Conduct correlation analysis using Pearson and Spearman methods.
+- Visualise key relationships (e.g., scatter plots, boxplots, heatmaps).
+- Test hypotheses about size, quality, and year built.
+- Present results clearly in a format the client can understand.
+
+---
+
+### Business Requirement 2: Predict the Sale Price of Inherited Houses and Others in Ames
+
+**Client Expectation:**  
+Use a machine learning model to predict the sale prices of the four inherited homes and any future homes.
+
+**Mapped Tasks:**
+
+- Select important features based on correlation and domain knowledge.
+- Preprocess and engineer data for ML modeling.
+- Train and evaluate regression models (e.g., Linear Regression, Random Forest).
+- Assess model performance using R² and MAE.
+- Deploy the model via a user-friendly **Streamlit app** to allow real-time prediction.
+
+This structured process ensures that the client's goals are met through both **insightful visual analysis** and a **practical predictive tool**, in line with the **CRISP-DM** methodology.
 
 ## ML Business Case
 
@@ -137,6 +188,4 @@ Although your friend has an excellent understanding of property prices in her ow
 
 ## Acknowledgements (optional)
 
-
 * In case you would like to thank the people that provided support through this project.
-
