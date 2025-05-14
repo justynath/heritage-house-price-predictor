@@ -73,46 +73,15 @@ A correlation study between `OverallQual` and `SalePrice` will help investigate 
 3 - We suspect that newer or recently renovated houses sell for more.  
 A correlation study between `YearBuilt`, `YearRemodAdd`, and `SalePrice` will help investigate this.
 
----
+### What We Found
 
-## Hypotheses and How to Validate Them (Expanded Version)
+We tested these three hypotheses using correlation scores and data visualisations. The results were:
 
-To help the client understand what drives house prices in Ames, Iowa, I formulated three simple hypotheses based on initial observations and domain knowledge. These are designed to be tested through data visualisation and correlation analysis.
+* **Larger houses really do sell for more.** Features like `GrLivArea`, `GarageArea`, and `TotalBsmtSF` had strong positive correlations with `SalePrice`.
+* **Higher quality makes a big difference.** `OverallQual` was the top predictor, and `KitchenQual` also showed a strong link to price.
+* **Newer homes are slightly more expensive.** `YearBuilt` and `YearRemodAdd` had moderate correlations with `SalePrice`, providing some support for this hypothesis.
 
-### Hypothesis 1: Bigger Houses Sell for More
-
-**H0 (Null Hypothesis):** There is no significant relationship between house size and sale price.  
-**H1 (Alternative Hypothesis):** Larger houses (e.g., higher above-ground living area) tend to have higher sale prices.
-
-**How to Validate:**
-
-- Use a scatter plot to visualise `GrLivArea` vs `SalePrice`.
-- Calculate correlation coefficients (Pearson and Spearman).
-
----
-
-### Hypothesis 2: Higher Quality Means Higher Price
-
-**H0:** There is no relationship between the overall quality rating and sale price.  
-**H1:** Houses with higher `OverallQual` tend to sell for more.
-
-**How to Validate:**
-
-- Use a boxplot to compare `OverallQual` levels against `SalePrice`.
-- Calculate correlation between `OverallQual` and `SalePrice`.
-
----
-
-### Hypothesis 3: Newer or Renovated Homes Are Worth More
-
-**H0:** The construction year or year of renovation has no effect on sale price.  
-**H1:** Newer houses or recently renovated homes tend to sell for higher prices.
-
-**How to Validate:**
-
-- Create scatter plots for `YearBuilt` and `YearRemodAdd` vs `SalePrice`.
-- Compare average sale prices by decade.
-- Perform correlation analysis to assess significance.
+These findings gave us clear direction when selecting features for the prediction model.
 
 ---
 
@@ -127,11 +96,15 @@ Identify which house features most influence the sale price through clear, infor
 
 **Mapped Tasks:**
 
-- Load, clean, and explore the Ames housing dataset.
-- Conduct correlation analysis using Pearson and Spearman methods.
-- Visualise key relationships (e.g., scatter plots, boxplots, heatmaps).
-- Test hypotheses about size, quality, and year built.
-- Present results clearly in a format the client can understand.
+* Load, clean, and explore the Ames housing dataset.
+* Conduct correlation analysis using Pearson and Spearman methods.
+* Visualise key relationships (e.g., scatter plots, boxplots, heatmaps).
+* Test hypotheses about size, quality, and year built.
+* Present results clearly in a format the client can understand.
+
+These correlation results confirmed our initial assumptions about house size, quality, and age.  
+They also helped us choose the top features that will be used in the machine learning model:  
+`OverallQual`, `GrLivArea`, `KitchenQual`, `GarageArea`, and `TotalBsmtSF`.
 
 ---
 
