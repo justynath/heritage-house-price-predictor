@@ -106,8 +106,6 @@ These correlation results confirmed our initial assumptions about house size, qu
 They also helped us choose the top features that will be used in the machine learning model:  
 `OverallQual`, `GrLivArea`, `KitchenQual`, `GarageArea`, and `TotalBsmtSF`.
 
----
-
 ### Business Requirement 2: Predict the Sale Price of Inherited Houses and Others in Ames
 
 **Client Expectation:**  
@@ -115,17 +113,144 @@ Use a machine learning model to predict the sale prices of the four inherited ho
 
 **Mapped Tasks:**
 
-- Select important features based on correlation and domain knowledge.
-- Preprocess and engineer data for ML modeling.
-- Train and evaluate regression models (e.g., Linear Regression, Random Forest).
-- Assess model performance using R² and MAE.
-- Deploy the model via a user-friendly **Streamlit app** to allow real-time prediction.
+* Select important features based on correlation and domain knowledge.
+* Preprocess and engineer data for ML modeling.
+* Train and evaluate regression models (e.g., Linear Regression, Random Forest).
+* Assess model performance using R² and MAE.
+* Deploy the model via a user-friendly **Streamlit app** to allow real-time prediction.
 
 This structured process ensures that the client's goals are met through both **insightful visual analysis** and a **practical predictive tool**, in line with the **CRISP-DM** methodology.
 
+---
+
 ## ML Business Case
 
-* In the previous bullet, you potentially visualised an ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
+### What are we trying to predict?
+
+We want to build a machine learning model that can **predict the sale price of a house** in Ames, Iowa, based on its characteristics (e.g. size, condition, year built, etc.).
+
+The target variable, `SalePrice`, is a **continuous numerical variable**, so we are using a **Regression Model**.
+
+This is a **supervised learning** task because the target variable is already known for the training data.
+
+### What is the goal of the ML system?
+
+To help the client:
+
+* Predict the sale prices of the 4 inherited houses.
+* Explore and compare estimated sale prices for other houses in Ames, Iowa.
+* Understand which house features have the biggest impact on price.
+
+### What makes the model successful?
+
+**Success Criteria (as agreed with the client):**
+
+* R² score of **at least 0.75** on both the training and test sets.
+* Visual inspection of **Actual vs Predicted Sale Price** to confirm that predictions align closely with real prices.
+
+**Failure Criteria:**
+
+* If after 12 months of use, **more than 30% of predictions differ from the real sale price by more than 40%**, the model will be considered expired and due for retraining.
+* If R² drops below 0.60 on new data, retraining will also be required.
+
+### What are the model's inputs and outputs?
+
+* **Inputs:** House attribute information such as square footage, quality rating, basement area, kitchen quality, garage size, etc.
+* **Output:** A **numeric value** representing the predicted sale price in USD.
+
+### What happens with the model?
+
+* The model is deployed in a **Streamlit web app**.
+* Users can interact with sliders and dropdowns to input house features.
+* The model makes a prediction instantly, and the app shows the estimated price along with key feature insights.
+
+### Heuristics and training data
+
+* The training data comes from the publicly available **Ames, Iowa housing dataset** on Kaggle.
+* It contains ~1500 housing records from the years 1872–2010.
+* No sensitive or personally identifiable data is used.
+
+---
+---
+
+## Agile Workflow
+
+To manage this project effectively, I used an agile approach based on the **CRISP-DM methodology**, supported by:
+
+* **Epics** and **User Stories** to break the project into actionable goals
+* A visual **[Kanban board](https://github.com/users/justynath/projects/11/views/1)** to track progress and maintain focus throughout the project
+* **MoSCoW prioritisation** to focus on what matters most
+
+### Epics
+
+* **Business & Data Understanding**  
+  Define the business problem and explore the dataset to ensure it supports the ML goal.
+
+* **Data Preparation**  
+  Clean and transform the dataset to make it ready for machine learning.
+
+* **Modelling & Evaluation**  
+  Build, train, and evaluate models to address the business objective.
+
+* **Deployment & Dashboard**  
+  Develop and deploy a Streamlit dashboard to present insights and predictions.
+
+* **Documentation & Review**  
+  Document the project comprehensively and ensure it is reproducible and understandable.
+
+### User Stories
+
+1. **Define business objectives and success criteria**
+   * Epic: Business & Data Understanding
+   * Priority: Must
+   * As a data practitioner, I want to define the business goals so that I can align the ML system with the client's needs.
+
+2. **Explore and understand the dataset**  
+   * Epic: Business & Data Understanding
+   * Priority: Must
+   * As a data practitioner, I want to explore the dataset to check if it can answer the business question.
+
+3. **Clean and structure the data**  
+   * Epic: Data Preparation
+   * Priority: Must
+   * As a data practitioner, I want to clean and structure the dataset so that it can be reliably used in modelling.
+
+4. **Engineer new features for modelling**  
+   * Epic: Data Preparation
+   * Priority: Should
+   * As a data practitioner, I want to create new features that improve model performance.
+
+5. **Build and evaluate ML models**  
+   * Epic: Modelling & Evaluation
+   * Priority: Must
+   * As a data practitioner, I want to build and evaluate models so that I can predict house prices accurately.
+
+6. **Improve model with hyperparameter tuning**  
+   * Epic: Modelling & Evaluation
+   * Priority: Should
+   * As a data practitioner, I want to optimise the model using tuning to improve predictive performance.
+
+7. **Build a dashboard for prediction and insights**  
+   * Epic: Deployment & Dashboard
+   * Priority: Must
+   * As a stakeholder, I want a dashboard where I can input house details and get sale price predictions.
+
+8. **Add visualisations and interactivity to dashboard**  
+   * Epic: Deployment & Dashboard
+   * Priority: Should
+   * As a stakeholder, I want visual insights and interactive features to explore data and predictions.
+
+9. **Write comprehensive project documentation**  
+   * Epic: Documentation & Review
+   * Priority: Must
+   * As a reviewer, I want to understand the full project by reading the README file.
+
+10. **Explain and validate project hypothesis**
+    * Epic: Documentation & Review
+    * Priority: Should
+    * As a reviewer, I want to understand the hypothesis and see how it's supported by the model results.
+
+---
 
 ## Dashboard Design
 
