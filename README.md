@@ -62,7 +62,7 @@ She found a **public dataset of Ames house sales** and has asked you, as a good 
 
 ---
 
-## Hypothesis and How to Validate (Simple Version)
+## Hypothesis and How to Validate
 
 1 - We suspect that larger houses tend to sell for higher prices.  
 A correlation study between `GrLivArea` (above-ground living area) and `SalePrice` will help investigate this.
@@ -171,7 +171,6 @@ To help the client:
 * No sensitive or personally identifiable data is used.
 
 ---
----
 
 ## Agile Workflow
 
@@ -183,79 +182,174 @@ To manage this project effectively, I used an agile approach based on the **CRIS
 
 ### Epics
 
-* **Business & Data Understanding**  
+* **EPIC 1: Business & Data Understanding**  
   Define the business problem and explore the dataset to ensure it supports the ML goal.
 
-* **Data Preparation**  
+* **EPIC 2: Data Preparation**  
   Clean and transform the dataset to make it ready for machine learning.
 
-* **Modelling & Evaluation**  
+* **EPIC 3: Modelling & Evaluation**  
   Build, train, and evaluate models to address the business objective.
 
-* **Deployment & Dashboard**  
+* **EPIC 4: Deployment & Dashboard**  
   Develop and deploy a Streamlit dashboard to present insights and predictions.
 
-* **Documentation & Review**  
+* **EPIC 5: Documentation & Review**  
   Document the project comprehensively and ensure it is reproducible and understandable.
 
 ### User Stories
 
-1. **Define business objectives and success criteria**
-   * Epic: Business & Data Understanding
-   * Priority: Must
-   * As a data practitioner, I want to define the business goals so that I can align the ML system with the client's needs.
+* **USER STORY 1: Define business objectives and success criteria**
+  * Epic: Business & Data Understanding
+  * Priority: Must
+  * As a data practitioner, I want to define the business goals so that I can align the ML system with the client's needs.
 
-2. **Explore and understand the dataset**  
-   * Epic: Business & Data Understanding
-   * Priority: Must
-   * As a data practitioner, I want to explore the dataset to check if it can answer the business question.
+* **USER STORY 2: Explore and understand the dataset**  
+  * Epic: Business & Data Understanding
+  * Priority: Must
+  * As a data practitioner, I want to explore the dataset to check if it can answer the business question.
 
-3. **Clean and structure the data**  
-   * Epic: Data Preparation
-   * Priority: Must
-   * As a data practitioner, I want to clean and structure the dataset so that it can be reliably used in modelling.
+* **USER STORY 3: Clean and structure the data**  
+  * Epic: Data Preparation
+  * Priority: Must
+  * As a data practitioner, I want to clean and structure the dataset so that it can be reliably used in modelling.
 
-4. **Engineer new features for modelling**  
-   * Epic: Data Preparation
-   * Priority: Should
-   * As a data practitioner, I want to create new features that improve model performance.
+* **USER STORY 4: Engineer new features for modelling**  
+  * Epic: Data Preparation
+  * Priority: Should
+  * As a data practitioner, I want to create new features that improve model performance.
 
-5. **Build and evaluate ML models**  
-   * Epic: Modelling & Evaluation
-   * Priority: Must
-   * As a data practitioner, I want to build and evaluate models so that I can predict house prices accurately.
+* **USER STORY 5: Build and evaluate ML models**  
+  * Epic: Modelling & Evaluation
+  * Priority: Must
+  * As a data practitioner, I want to build and evaluate models so that I can predict house prices accurately.
 
-6. **Improve model with hyperparameter tuning**  
-   * Epic: Modelling & Evaluation
-   * Priority: Should
-   * As a data practitioner, I want to optimise the model using tuning to improve predictive performance.
+* **USER STORY 6: Improve model with hyperparameter tuning**  
+  * Epic: Modelling & Evaluation
+  * Priority: Should
+  * As a data practitioner, I want to optimise the model using tuning to improve predictive performance.
 
-7. **Build a dashboard for prediction and insights**  
-   * Epic: Deployment & Dashboard
-   * Priority: Must
-   * As a stakeholder, I want a dashboard where I can input house details and get sale price predictions.
+* **USER STORY 7: Build a dashboard for prediction and insights**  
+  * Epic: Deployment & Dashboard
+  * Priority: Must
+  * As a stakeholder, I want a dashboard where I can input house details and get sale price predictions.
 
-8. **Add visualisations and interactivity to dashboard**  
-   * Epic: Deployment & Dashboard
-   * Priority: Should
-   * As a stakeholder, I want visual insights and interactive features to explore data and predictions.
+* **USER STORY 8: Add visualisations and interactivity to dashboard**  
+  * Epic: Deployment & Dashboard
+  * Priority: Should
+  * As a stakeholder, I want visual insights and interactive features to explore data and predictions.
 
-9. **Write comprehensive project documentation**  
-   * Epic: Documentation & Review
-   * Priority: Must
-   * As a reviewer, I want to understand the full project by reading the README file.
+* **USER STORY 9: Write comprehensive project documentation**  
+  * Epic: Documentation & Review
+  * Priority: Must
+  * As a reviewer, I want to understand the full project by reading the README file.
 
-10. **Explain and validate project hypothesis**
-    * Epic: Documentation & Review
-    * Priority: Should
-    * As a reviewer, I want to understand the hypothesis and see how it's supported by the model results.
+* **USER STORY 10: Explain and validate project hypothesis**
+  * Epic: Documentation & Review
+  * Priority: Should
+  * As a reviewer, I want to understand the hypothesis and see how it's supported by the model results.
 
 ---
 
-## Dashboard Design
+## Dashboard Design (Streamlit App User Interface)
 
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other items that your dashboard library supports.
-* Eventually, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but eventually you needed to use another plot type)
+This Streamlit app is designed with **two audiences** in mind:
+* **Business users** (e.g., housing policy makers, local authorities)
+* **Technical users** (e.g., data scientists or assessors)
+
+The structure follows the CRISP-DM methodology and delivers clear **Use Cases** and **Courses of Action** through 6 interactive pages.
+
+### **Page 1: Quick Project Summary**
+
+**Target User**: Business stakeholder
+
+This page contains two main sections:
+
+* **Project Overview**
+  * Project purpose: Predict sale prices of houses using a clean, engineered dataset.
+  * Definitions of key terms (e.g., SalePrice, feature engineering, regression).
+  * Link to the GitHub repository.
+* **Business Requirements**
+  * BR1: Identify which features most strongly correlate with house sale price.
+  * BR2: Predict the sale price of a property using a regression pipeline.
+
+### **Page 2: Data Insights and Correlation Findings**
+
+**Target User**: Business stakeholder  
+**Maps to**: Business Requirement 1
+
+This page supports data understanding and actionable insights:
+
+* Checkbox: Show dataset dimensions and preview first 10 rows.
+* Highlight of top correlated features with `SalePrice`, including:
+  * Numeric variables (e.g., `GrLivArea`, `OverallQual`)
+  * Engineered or transformed features
+* Optional checkboxes:
+  * Distribution plots of top features
+  * Correlation heatmap or pairplots
+* Summary of what impacts house prices the most
+
+### **Page 3: House Price Predictor**
+
+**Target User**: Business stakeholder or app user  
+**Maps to**: Business Requirement 2
+
+Interactive form for live predictions:
+
+* User inputs for key features (e.g., number of rooms, area, year built, etc.)
+* Button: `Predict Sale Price`
+* Output: Estimated price prediction
+* Sidebar note on prediction confidence and assumptions
+
+**Course of Action**: Users can simulate property values and explore price sensitivity for renovation or investment planning.
+
+### **Page 4: ML Pipeline & Performance**
+
+**Target User**: Technical user  
+**Maps to**: Learning Outcome LO5.2, LO6.2
+
+This page explains how the predictive model was built and validated:
+
+* Description of the ML pipeline steps:
+  * Preprocessing: imputations, scaling, encoding
+  * Feature selection
+  * Model training (e.g., Linear Regression)
+* Visuals:
+  * Actual vs Predicted (Train + Test)
+  * Top 15 Features by Coefficient (Linear Regression)
+* Metrics:
+  * R², MAE, RMSE (Train/Test)
+* Clear statement: Does the model meet the R² ≥ 0.75 success criteria?
+
+### **Page 5: Hypotheses and Validation**
+
+**Target User**: Both audiences  
+**Maps to**: LO2.2, LO4.2, LO5.7
+
+Summary of project hypotheses and how they were validated:
+
+| Hypothesis | Outcome | Validation Method |
+|-----------|---------|--------------------|
+| Features like `OverallQual` and `GrLivArea` have high influence on `SalePrice`. | Supported | Correlation analysis and model coefficients |
+| Transformed features (e.g., log of 1stFlrSF) improve prediction | Supported | Performance improvement via feature engineering |
+
+This page explains both **data reasoning** and **ML design decisions**.
+
+### **Page 6: Technical Overview**
+
+**Target User**: Technical users / assessors  
+*Optional but useful for completeness*
+
+* Git and version control summary
+* Data pipeline architecture
+* Tools and libraries used (pandas, scikit-learn, feature-engine, seaborn)
+* Model export and Streamlit integration logic (including `.filter(training_columns)` to ensure feature order consistency)
+
+### Summary
+
+This dashboard structure ensures all users—from decision-makers to technical reviewers—can understand, interact with, and act on the insights and predictions generated by the ML pipeline. It also fulfills the assessment criteria for user experience, data storytelling, and ML interpretability.
+
+---
 
 ## Unfixed Bugs
 
