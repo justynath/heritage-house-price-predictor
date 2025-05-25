@@ -254,6 +254,7 @@ To manage this project effectively, I used an agile approach based on the **CRIS
 ## Dashboard Design (Streamlit App User Interface)
 
 This Streamlit app is designed with **two audiences** in mind:
+
 * **Business users** (e.g., housing policy makers, local authorities)
 * **Technical users** (e.g., data scientists or assessors)
 
@@ -273,7 +274,7 @@ This page contains two main sections:
   * BR1: Identify which features most strongly correlate with house sale price.
   * BR2: Predict the sale price of a property using a regression pipeline.
 
-### **Page 2: Data Insights and Correlation Findings**
+### **Page 2: Data Study - Insights and Correlation Findings**
 
 **Target User**: Business stakeholder  
 **Maps to**: Business Requirement 1
@@ -303,10 +304,24 @@ Interactive form for live predictions:
 
 **Course of Action**: Users can simulate property values and explore price sensitivity for renovation or investment planning.
 
-### **Page 4: ML Pipeline & Performance**
+### **Page 4: Hypotheses and Validation**
+
+**Target User**: Both audiences  
+**Maps to**: Business Requirements and project hypotheses
+
+Summary of project hypotheses and how they were validated:
+
+| Hypothesis | Outcome | Validation Method |
+|-----------|---------|--------------------|
+| Features like `OverallQual` and `GrLivArea` have high influence on `SalePrice`. | Supported | Correlation analysis and model coefficients |
+| Transformed features (e.g., log of 1stFlrSF) improve prediction | Supported | Performance improvement via feature engineering |
+
+This page explains both **data reasoning** and **ML design decisions**.
+
+### **Page 5: ML Pipeline & Performance**
 
 **Target User**: Technical user  
-**Maps to**: Learning Outcome LO5.2, LO6.2
+**Maps to**: Business Requirement 2 and model performance validation
 
 This page explains how the predictive model was built and validated:
 
@@ -320,30 +335,6 @@ This page explains how the predictive model was built and validated:
 * Metrics:
   * R², MAE, RMSE (Train/Test)
 * Clear statement: Does the model meet the R² ≥ 0.75 success criteria?
-
-### **Page 5: Hypotheses and Validation**
-
-**Target User**: Both audiences  
-**Maps to**: LO2.2, LO4.2, LO5.7
-
-Summary of project hypotheses and how they were validated:
-
-| Hypothesis | Outcome | Validation Method |
-|-----------|---------|--------------------|
-| Features like `OverallQual` and `GrLivArea` have high influence on `SalePrice`. | Supported | Correlation analysis and model coefficients |
-| Transformed features (e.g., log of 1stFlrSF) improve prediction | Supported | Performance improvement via feature engineering |
-
-This page explains both **data reasoning** and **ML design decisions**.
-
-### **Page 6: Technical Overview**
-
-**Target User**: Technical users / assessors  
-*Optional but useful for completeness*
-
-* Git and version control summary
-* Data pipeline architecture
-* Tools and libraries used (pandas, scikit-learn, feature-engine, seaborn)
-* Model export and Streamlit integration logic (including `.filter(training_columns)` to ensure feature order consistency)
 
 ### Summary
 
