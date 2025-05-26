@@ -119,10 +119,8 @@ Use a machine learning model to predict the sale prices of the four inherited ho
 * Assess model performance using R² and MAE.
 * Deploy the model via a user-friendly **Streamlit app** to allow real-time prediction.
 
-To support real-time prediction in the deployed Streamlit application, a simplified machine learning pipeline was created using only the top 5 most influential features (`GrLivArea`, `OverallQual`, `GarageArea`, `TotalBsmtSF`, `YearBuilt`). 
-
-This streamlined version of the model is trained separately and saved specifically for the web app. It removes the need for complex preprocessing steps like categorical encoding and missing value imputation, which would complicate the user experience. 
-
+To support real-time prediction in the deployed Streamlit application, a simplified machine learning pipeline was created using only the top 5 most influential features (`GrLivArea`, `OverallQual`, `GarageArea`, `TotalBsmtSF`, `YearBuilt`).
+This streamlined version of the model is trained separately and saved specifically for the web app. It removes the need for complex preprocessing steps like categorical encoding and missing value imputation, which would complicate the user experience.
 The full-featured pipeline with all transformations and tuning remains documented and evaluated in the modeling notebook. This design ensures that the application remains responsive and user-friendly while still providing reliable predictions based on the most impactful variables.
 
 This structured process ensures that the client's goals are met through both **insightful visual analysis** and a **practical predictive tool**, in line with the **CRISP-DM** methodology.

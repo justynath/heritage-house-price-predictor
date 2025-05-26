@@ -11,11 +11,11 @@ df = load_full_cleaned_data()
 
 
 def page_data_study_body():
-    st.write("### 🧪 Data Study: Feature Influence on Sale Price")
+    st.write("### Data Study: Feature Influence on Sale Price")
 
     # Context
     st.info(
-        f"📌 **Business Requirement 1**\n\n"
+        f"**Business Requirement 1**\n\n"
         f"The client wants to understand how house attributes influence sale price.\n"
         f"This section provides correlation insights and visualisations based on the Ames Housing dataset."
     )
@@ -29,7 +29,7 @@ def page_data_study_body():
         st.write(f"Rows: {df.shape[0]}, Columns: {df.shape[1]}")
 
     st.write("---")
-    st.markdown("#### 🔗 Correlation Study")
+    st.markdown("#### Correlation Study")
 
     # Correlation summary
     st.write(
