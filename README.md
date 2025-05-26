@@ -320,6 +320,12 @@ Summary of project hypotheses and how they were validated:
 | Features like `OverallQual` and `GrLivArea` have high influence on `SalePrice`. | Supported | Correlation analysis and model coefficients |
 | Transformed features (e.g., log of 1stFlrSF) improve prediction | Supported | Performance improvement via feature engineering |
 
+This page includes:
+
+* A written summary of each hypothesis
+* A validation table outlining outcomes and methods
+* An optional correlation heatmap of key variables
+
 This page explains both **data reasoning** and **ML design decisions**.
 
 ### **Page 5: ML Pipeline & Performance**
