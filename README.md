@@ -1,8 +1,9 @@
 # Heritage House Price Predictor - ML
 
-*Image & live link placeholder*
+![image_dashboard](./static/image_dashboard.png)
+[Live Page](https://heritage-house-jth-8009aedd997c.herokuapp.com/)
 
-## Overview
+## Overview <a name="overview"></a>
 
 The Heritage House Price Predictor is a data-driven project developed to help a client determine accurate sale prices for a set of inherited homes in **Ames, Iowa**. The primary aim is to estimate the total expected value of these properties and to understand how specific features—such as location, size, and condition—impact their market price.
 
@@ -11,8 +12,26 @@ Using a combination of **data analysis**, **machine learning**, and **interactiv
 The project follows the **CRISP-DM (Cross Industry Standard Process for Data Mining)** methodology. This structured approach ensures that the workflow—from understanding business needs to evaluating predictive models—is transparent and repeatable.
 
 ---
+<a name="top"></a>
 
-## Dataset Content
+## Table of Contents
+
+* [Overview](#overview)
+* [Dataset Content](#dataset-content)
+* [Business Requirements](#business-requirements)
+* [Hypotheses and Validation](#hypotheses-and-how-to-validate)
+* [ML Business Case](#ml-business-case)
+* [Data Preparation and Feature Engineering](#data-preparation-and-feature-engineering)
+* [Model Iteration and Tuning Strategy](#model-iteration-and-tuning-strategy)
+* [Agile Workflow](#agile-workflow)
+* [Dashboard Design](#dashboard-design-streamlit-app-user-interface)
+* [Deployment](#deployment)
+* [Main Libraries](#main-data-analysis-and-machine-learning-libraries)
+* [Credits](#credits)
+
+---
+
+## Dataset Content <a name="dataset-content"></a>
 
 * The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/housing-prices-data). We then created a fictitious user story where predictive analytics can be applied in a real project in the workplace.
 * The dataset has almost 1.5 thousand rows and represents housing records from Ames, Iowa, indicating house profile (Floor Area, Basement, Garage, Kitchen, Lot, Porch, Wood Deck, Year Built) and its respective sale price for houses built between 1872 and 2010.
@@ -44,9 +63,11 @@ The project follows the **CRISP-DM (Cross Industry Standard Process for Data Min
 |YearRemodAdd|Remodel date (same as construction date if no remodelling or additions)|1950 - 2010|
 |SalePrice|Sale Price|34900 - 755000|
 
+[Back to Top](#top)
+
 ---
 
-## Business Requirements
+## Business Requirements <a name="business-requirements"></a>
 
 Your friend has inherited four homes in Ames, Iowa, from her late great-grandfather. While she understands property values well in her home state, she is concerned that relying on that knowledge in a different location could lead to **inaccurate appraisals**.
 
@@ -60,32 +81,46 @@ She found a **public dataset of Ames house sales** and has asked you, as a good 
 2. **Price Prediction Model:**  
    The client wants to **predict the sale price** of her four inherited homes and be able to predict prices for **other homes** in Ames using a trained machine learning model.
 
+[Back to Top](#top)
+
 ---
 
-## Hypothesis and How to Validate
+## Hypotheses and How to Validate <a name="hypotheses-and-how-to-validate"></a>
 
-1 - We suspect that larger houses tend to sell for higher prices.  
-A correlation study between `GrLivArea` (above-ground living area) and `SalePrice` will help investigate this.
+1 – **We suspect that larger houses tend to sell for higher prices.**  
+→ Validated using a Pearson correlation analysis between `GrLivArea` and `SalePrice`.
 
-2 - We believe that houses with higher quality ratings are more valuable.  
-A correlation study between `OverallQual` and `SalePrice` will help investigate this.
+2 – **We believe that houses with higher quality ratings are more valuable.**  
+→ Validated using a Pearson correlation between `OverallQual` and `SalePrice`.
 
-3 - We suspect that newer or recently renovated houses sell for more.  
-A correlation study between `YearBuilt`, `YearRemodAdd`, and `SalePrice` will help investigate this.
+3 – **We suspect that newer or recently renovated houses sell for more.**  
+→ Validated using correlations between `YearBuilt`, `YearRemodAdd`, and `SalePrice`.
 
 ### What We Found
 
-We tested these three hypotheses using correlation scores and data visualisations. The results were:
+We tested these three hypotheses using statistical correlation scores and data visualisations. The results were:
 
-* **Larger houses really do sell for more.** Features like `GrLivArea`, `GarageArea`, and `TotalBsmtSF` had strong positive correlations with `SalePrice`.
-* **Higher quality makes a big difference.** `OverallQual` was the top predictor, and `KitchenQual` also showed a strong link to price.
-* **Newer homes are slightly more expensive.** `YearBuilt` and `YearRemodAdd` had moderate correlations with `SalePrice`, providing some support for this hypothesis.
+* **Larger houses really do sell for more.**  
+  * `GrLivArea` had a strong positive Pearson correlation with `SalePrice` (**0.71**).
+  * `GarageArea` (0.64) and `TotalBsmtSF` (0.61) also showed strong positive relationships.
+  * **Course of Action**: Lydia should prioritise larger homes in terms of living space, garage, and basement when setting prices. She can highlight these attributes when marketing.
 
-These findings gave us clear direction when selecting features for the prediction model.
+* **Higher quality makes a big difference.**  
+  * `OverallQual` showed the strongest correlation with `SalePrice` (**0.79**), making it the most predictive feature.
+  * `KitchenQual` had a strong correlation as well (**0.67**).
+  * **Course of Action**: Lydia could consider minor renovations or staging to improve the perceived or actual quality of homes before selling. Homes with higher quality ratings should be priced at a premium.
+
+* **Newer homes are slightly more expensive.**  
+  * `YearBuilt` (0.52) and `YearRemodAdd` (0.51) had moderate correlations with `SalePrice`.
+  * **Course of Action**: Emphasise renovation history and the modernity of any structural updates in property listings. For older homes, recent remodelling should be showcased prominently.
+
+These findings gave us clear, data-driven direction when selecting features for the machine learning model and allowed Lydia to make strategic pricing and marketing decisions.
+
+[Back to Top](#top)
 
 ---
 
-## Rationale to Map the Business Requirements to Data Visualisations and ML Tasks
+## Rationale to Map the Business Requirements to Data Visualisations and ML Tasks <a name="rationale-to-map-the-business-requirements-to-data-visualisations-and-ml-tasks"></a>
 
 To address the client’s goal of maximising the sale price of the inherited homes, this project translates each business requirement into actionable data analysis and machine learning tasks.
 
@@ -125,9 +160,11 @@ The full-featured pipeline with all transformations and tuning remains documente
 
 This structured process ensures that the client's goals are met through both **insightful visual analysis** and a **practical predictive tool**, in line with the **CRISP-DM** methodology.
 
+[Back to Top](#top)
+
 ---
 
-## ML Business Case
+## ML Business  <a name="ml-business-case"></a>
 
 ### What are we trying to predict?
 
@@ -174,9 +211,96 @@ To help the client:
 * It contains ~1500 housing records from the years 1872–2010.
 * No sensitive or personally identifiable data is used.
 
+[Back to Top](#top)
+
 ---
 
-## Agile Workflow
+## Data Preparation and Feature Engineering <a name="data-preparation-and-feature-engineering"></a>
+
+A dedicated **feature engineering notebook** was used to explore and apply appropriate transformations to the dataset before training the machine learning model. This step ensured data consistency, improved model accuracy, and reduced the impact of outliers and skewness.
+
+### Transformations Applied
+
+* **Ordinal Encoding**  
+  Applied to categorical variables such as `BsmtExposure`, `BsmtFinType1`, `GarageFinish`, and `KitchenQual` using `OrdinalEncoder` from the `feature-engine` library. Missing values were imputed with `'None'` before encoding.
+
+* **Numerical Transformations**  
+  Several techniques were tested on skewed numeric features (`LotArea`, `GrLivArea`, `MasVnrArea`, `TotalBsmtSF`, `1stFlrSF`, `2ndFlrSF`, `OpenPorchSF`) to improve normality:
+  * Natural log (`log_e`)
+  * Base 10 log (`log_10`)
+  * Reciprocal
+  * Power transform
+  * Box-Cox transform
+  * Yeo-Johnson transform
+
+  Each transformation was evaluated using **histograms, QQ plots, and boxplots** to determine distribution improvement and visual normality.
+
+* **Outlier Handling (Winsorization)**  
+  The **IQR method** was used via `Winsorizer` to cap extreme values in numeric features, reducing the influence of outliers.
+
+### Validation Strategy
+
+* All transformations were applied using a custom function `FeatureEngineeringAnalysis`, which logged successful and unsuccessful attempts.
+* Diagnostic plots (histograms, QQ plots, boxplots) were reviewed for every transformation to assess normalisation impact.
+* Transformations were selected based on their **visual improvement** and their **contribution to predictive performance**, measured during model iteration.
+
+This structured and justified approach to data preparation ensures compliance with **CRISP-DM’s Data Preparation stage**.
+
+[Back to Top](#top)
+
+---
+
+## Model Iteration and Tuning Strategy <a name="model-iteration-and-tuning-strategy"></a>
+
+To ensure the most accurate and generalisable predictions, multiple regression models were evaluated and fine-tuned using `GridSearchCV` with 5-fold cross-validation. The goal was to identify the model and hyperparameter combination that yielded the highest R² score.
+
+### Models Evaluated
+
+1. **Linear Regression** – Used as a baseline model (no hyperparameters to tune).
+2. **Random Forest Regressor**
+3. **Gradient Boosting Regressor**
+4. **XGBoost Regressor**
+
+Each model was wrapped into a complete pipeline that included imputation, encoding, transformations (e.g., YeoJohnson and log), feature selection, and scaling.
+
+### Hyperparameter Tuning Strategy
+
+For models that support tuning, the following hyperparameters were tested:
+
+#### Random Forest Regressor
+
+* `n_estimators`: [50, 100, 150] – Controls the number of trees in the forest.
+* `max_depth`: [None, 5, 15] – Limits tree depth to prevent overfitting.
+* `min_samples_split`: [2, 5, 10] – Minimum samples required to split an internal node.
+
+#### Gradient Boosting and XGBoost
+
+* `n_estimators`: [100] – Standard number of boosting rounds.
+* `learning_rate`: [0.1, 0.01] – Shrinks the contribution of each tree (learning rate vs. overfitting trade-off).
+
+### Evaluation and Selection
+
+* **Performance Metric**: R² (coefficient of determination) was used for cross-validation scoring.
+* **Best Model**: The **Random Forest Regressor** achieved the highest cross-validated R² score and was therefore selected as the final model.
+* The selected hyperparameters for Random Forest were:
+
+```python
+{
+    'regressor__n_estimators': 150,
+    'regressor__max_depth': None,
+    'regressor__min_samples_split': 2
+}
+```
+
+This model performed robustly on both training and test sets, and its predictions were further evaluated using Actual vs Predicted plots and Mean Absolute Error (MAE).
+
+A simplified version of this model, using the top 5 most important features, was separately saved and deployed to the Streamlit dashboard for user interaction.
+
+[Back to Top](#top)
+
+---
+
+## Agile Workflow <a name="agile-workflow"></a>
 
 To manage this project effectively, I used an agile approach based on the **CRISP-DM methodology**, supported by:
 
@@ -253,9 +377,11 @@ To manage this project effectively, I used an agile approach based on the **CRIS
   * Priority: Should
   * As a reviewer, I want to understand the hypothesis and see how it's supported by the model results.
 
+[Back to Top](#top)
+
 ---
 
-## Dashboard Design (Streamlit App User Interface)
+## Dashboard Design (Streamlit App User Interface) <a name="dashboard-design-streamlit-app-user-interface"></a>
 
 This Streamlit app is designed with **two audiences** in mind:
 
@@ -278,35 +404,45 @@ This page contains two main sections:
   * BR1: Identify which features most strongly correlate with house sale price.
   * BR2: Predict the sale price of a property using a regression pipeline.
 
-### **Page 2: Data Study - Insights and Correlation Findings**
+### **Page 2: Data Study – Insights and Correlation Findings**
 
 **Target User**: Business stakeholder  
 **Maps to**: Business Requirement 1
 
 This page supports data understanding and actionable insights:
 
-* Checkbox: Show dataset dimensions and preview first 10 rows.
-* Highlight of top correlated features with `SalePrice`, including:
-  * Numeric variables (e.g., `GrLivArea`, `OverallQual`)
-  * Engineered or transformed features
-* Optional checkboxes:
-  * Distribution plots of top features
-  * Correlation heatmap or pairplots
-* Summary of what impacts house prices the most
+* A data preview table (enabled via checkbox) shows the first 10 rows and dataset dimensions.
+* A correlation study summary highlights top features influencing `SalePrice`, including both numeric and engineered variables.
+* Interactive visual options (toggleable via checkboxes):
+  * Correlation heatmap of top predictors (e.g., `GrLivArea`, `OverallQual`, `GarageArea`, `TotalBsmtSF`)
+  * Distribution plots (histograms with KDE) for individual features
+  * Scatter plot of `SalePrice` vs `GrLivArea`, color-coded by `OverallQual`
+
+These visualisations help users intuitively understand what drives house prices in Ames and guide feature selection for modelling.
 
 ### **Page 3: House Price Predictor**
 
 **Target User**: Business stakeholder or app user  
 **Maps to**: Business Requirement 2
 
-Interactive form for live predictions:
+This page enables real-time interaction with the trained machine learning model:
 
-* User inputs for key features (e.g., number of rooms, area, year built, etc.)
-* Button: `Predict Sale Price`
-* Output: Estimated price prediction
-* Sidebar note on prediction confidence and assumptions
+* Users input key house features using sliders and number fields.
+* After clicking the "Predict Sale Price" button, the app returns an estimated price immediately.
+* A sidebar message explains the assumptions and scope of the model.
 
-**Course of Action**: Users can simulate property values and explore price sensitivity for renovation or investment planning.
+This page allows the user to simulate property values and explore how changes to variables like size, quality, or year built affect the predicted sale price, supporting informed pricing and renovation decisions.
+
+### Visualisation and Interactivity Summary 
+
+* At least four distinct visualisations are presented across the dashboard:
+  * Correlation heatmap
+  * Feature distribution plots
+  * Scatter plot of `SalePrice` vs `GrLivArea`
+  * Data preview table
+* The house price prediction form provides real-time interactivity through user-controlled inputs and live model inference.
+
+All visualisations on Page 2 are displayed using Streamlit checkboxes, allowing users to explore the data at their own pace. Page 3 enables dynamic interaction with the machine learning model.
 
 ### **Page 4: Hypotheses and Validation**
 
@@ -333,64 +469,172 @@ This page explains both **data reasoning** and **ML design decisions**.
 **Target User**: Technical user  
 **Maps to**: Business Requirement 2 and model performance validation
 
-This page explains how the predictive model was built and validated:
+This page explains how the predictive model was built, what features it used, and how well it performed:
 
-* Description of the ML pipeline steps:
-  * Preprocessing: imputations, scaling, encoding
-  * Feature selection
-  * Model training (e.g., Linear Regression)
-* Visuals:
-  * Actual vs Predicted (Train + Test)
-  * Top 15 Features by Coefficient (Linear Regression)
-* Metrics:
-  * R², MAE, RMSE (Train/Test)
-* Clear statement: Does the model meet the R² ≥ 0.75 success criteria?
+* A **summary of the full ML pipeline**, including preprocessing, feature selection, and final model.
+* A **feature importance plot** highlighting the most influential predictors (optional, included if available).
+* Two **Actual vs Predicted Sale Price** plots for both training and test sets.
+* A **real-time performance table** displaying R² and MAE metrics, generated from live model inference using Streamlit.
+* A clear statement confirming that the model meets the success threshold (R² ≥ 0.75), validating it for real-world use.
 
+This combination of static visuals and interactive metrics supports Business Requirement 2 and satisfies LO6.4 and LO6.5.
+  
 ### Summary
 
 This dashboard structure ensures all users—from decision-makers to technical reviewers—can understand, interact with, and act on the insights and predictions generated by the ML pipeline. It also fulfills the assessment criteria for user experience, data storytelling, and ML interpretability.
 
+[Back to Top](#top)
+
 ---
 
-## Unfixed Bugs
+## Unfixed Bugs <a name="unfixed-bugs"></a>
 
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not valid reason to leave bugs unfixed.
+At the time of submitting this project, **there are no known bugs**.
 
-## Deployment
+All identified issues during development and testing were resolved. This includes:
 
-### Heroku
+* Fixing deployment-related errors (e.g., `.slugignore` and `runtime.txt` configurations).
+* Resolving version conflicts with dependencies during package installation.
+* Handling missing values, outliers, and encoding issues during data preprocessing.
+* Verifying all Streamlit dashboard components and user interactions.
 
-* The App live link is: <https://YOUR_APP_NAME.herokuapp.com/>
-* Set the .python-version Python version to a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
+Extensive manual testing and peer review ensured that the application behaves as expected across all features.  
+Should any issues arise after submission, they will be documented and resolved in future updates.
 
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+[Back to Top](#top)
 
-## Main Data Analysis and Machine Learning Libraries
+---
 
-* Here you should list the libraries you used in the project and provide example(s) of how you used these libraries.
+## Deployment <a name="deployment"></a>
 
-## Credits
+### Heroku Deployment
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism.
-* You can break the credits section up into Content and Media, depending on what you have included in your project.
+The latest version of the Heritage House Price Predictor app is deployed on **Heroku**.
+
+[Live App](https://heritage-house-jth-8009aedd997c.herokuapp.com/)
+
+The project was deployed to Heroku using the following steps:
+
+1. Log in to Heroku and create a new App.
+2. Navigate to the **Deploy** tab and select **GitHub** as the deployment method.
+3. Search for your GitHub repository and click **Connect** when it appears.
+4. Choose the branch you want to deploy (e.g., `main`) and click **Deploy Branch**.
+5. Once the deployment is complete, click the **Open App** button at the top of the page to access your live application.
+
+If you encounter a **slug size error** during deployment, create a `.slugignore` file and list any large files or directories that are not required by the app (e.g., datasets, notebooks, or media assets). This helps reduce the slug size and ensures a smooth deployment.
+
+**Python Runtime**  
+Make sure to specify a Heroku-supported Python version in your project by including a `runtime.txt` file or setting `.python-version`. For Heroku-22 stack compatibility, use a version like: python-3.10.13
+
+### Heroku CLI Access
+
+To enable CLI access via the Heroku Toolbelt:
+
+1. Log in to your Heroku account and go to **Account Settings** under your profile icon.
+2. Scroll down to the **API Key** section and click **Reveal**.
+3. Copy the key.
+4. In your cloud-based IDE terminal, run:
+
+   ```bash
+   heroku_config
+   ```
+
+5. Paste your API key when prompted.
+6. You can now use CLI commands such as:
+
+   ```bash
+   heroku apps
+   ```
+
+Your API key is private—never share it. If it becomes public, regenerate it immediately.
+
+### Forking and Running the Project in a Cloud IDE
+
+1. Log into **GitHub** (or create an account).
+2. Click **Create fork** → **+ Create new fork**.
+3. Once forked, click the **Code** button and copy the repository URL.
+4. Log into your **cloud IDE** and click **Create**.
+5. Paste the copied URL and click **Create** again.
+6. Wait for the workspace to open.
+7. In the terminal, install the project requirements:
+
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+8. If you encounter dependency conflicts, resolve them by running:
+
+   ```bash
+   pip install "anyio<4.0" "async-lru<2.0" "rich<10.0"
+   pip install twine==3.7.1
+   ```
+
+9. Open the jupyter_notebooks directory and click on the notebook you want to use.
+10. Select the Python Environments kernel. It should default to Python 3.8.18 from the workspace. To confirm the version, run this in a notebook cell:
+
+   ```bash
+   !python --version
+   ```
+
+[Back to Top](#top)
+
+---
+
+## Main Data Analysis and Machine Learning Libraries <a name="main-data-analysis-and-machine-learning-libraries"></a>
+
+The following Python libraries were used in this project. The version used for each is shown in parentheses.
+
+* **numpy (1.26.1)**  
+  A fundamental library for numerical computing in Python. It supports arrays, mathematical functions, and forms the core dependency for many other packages used in this project.
+
+* **pandas (2.1.1)**  
+  Used for reading, cleaning, and manipulating structured data. Data from CSV files was loaded into DataFrames for easy analysis and transformation.
+
+* **matplotlib (3.8.0)**  
+  A flexible plotting library used for data visualisations, including charts in the Jupyter Notebooks and visualising feature relationships. Offers extensive customisation options.
+
+* **seaborn (0.13.2)**  
+  Built on top of matplotlib, Seaborn was used to create clear and visually attractive statistical plots to explore hypotheses and feature distributions.
+
+* **plotly (5.17.0)**  
+  Used to create interactive visualisations within the Streamlit dashboard, such as dynamic scatter plots and correlation visuals.
+
+* **streamlit (1.40.2)**  
+  This library powers the interactive web application. It allows users to explore the trained machine learning model in a simple and user-friendly interface.
+
+* **feature-engine (1.6.1)**  
+  Used for preprocessing during the ML pipeline. Specifically, it helped apply transformations such as ordinal encoding and outlier handling (e.g., Winsorization).
+
+* **imbalanced-learn (0.11.0)**  
+  A library for dealing with class imbalance. While not central to the regression task, it was explored during experimentation phases for potential classification-based extensions.
+
+* **scikit-learn (1.3.1)**  
+  The main library used for machine learning. It provided the tools for building pipelines, preprocessing data (e.g., `StandardScaler`), and training regression models.
+
+* **xgboost (1.7.6)**  
+  A high-performance library for gradient boosting. It was used to train one of the predictive models evaluated during the project.
+
+### Note on Unused or Removed Packages
+
+Some packages were included during development for exploratory work or advanced visualisation but are not required in deployment:
+
+* `ydata-profiling`, `ppscore`, `yellowbrick`, and `Pillow` can be removed from the final `requirements.txt` before deployment to reduce slug size and improve build speed.
+
+[Back to Top](#top)
+
+---
+
+## Credits <a name="credits"></a>
 
 ### Content
 
-* The text for the Home page was taken from Wikipedia Article A
-* Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-* The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+* This project was developed as part of the **Code Institute Predictive Analytics course**.
+* The overall structure and many key ideas were adapted from the **Code Institute Churnometer walkthrough project**, which served as a valuable reference for planning the machine learning pipeline and Streamlit dashboard.
+* I followed guidance and examples from **Code Institute's scikit-learn lessons**, which helped shape the model selection and evaluation process.
+* The initial file structure and README layout were based on the **Code Institute Template**.
+* The **Streamlit dashboard text** was written by me, but draws inspiration from the Churnometer project for tone and clarity.
+* I used **emoji icons** in the dashboard interface, enabled via MacOS keyboard shortcuts.
+* The **business case** and user story were adapted from the Handbook: Heritage Housing Issues provided by Code Institute.
+* Some code snippets and functions were adapted from the **Code Institute Data Analysis & Machine Learning Toolkit**.
 
-### Media
-
-* The photos used on the home and sign-up page are from This Open Source site
-* The images used for the gallery page were taken from this other open-source site
-
-## Acknowledgements (optional)
-
-* In case you would like to thank the people that provided support through this project.
+[Back to Top](#top)
