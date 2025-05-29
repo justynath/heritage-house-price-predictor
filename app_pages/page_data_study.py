@@ -16,13 +16,15 @@ def page_data_study_body():
     # Context
     st.info(
         f"**Business Requirement 1**\n\n"
-        f"The client wants to understand how house attributes influence sale price.\n"
-        f"This section provides correlation insights and visualisations based on the Ames Housing dataset."
+        f"The client wants to understand how house attributes "
+        f"influence sale price.\n"
+        f"This section provides correlation insights and visualisations "
+        F"based on the Ames Housing dataset."
     )
 
     # Load data
     df = load_full_cleaned_data()
-    
+
     # Inspect dataset
     if st.checkbox("🔍 Inspect Dataset (first 10 rows)"):
         st.dataframe(df.head(10))
@@ -33,13 +35,16 @@ def page_data_study_body():
 
     # Correlation summary
     st.write(
-        f"* We conducted a correlation study to evaluate how house size, quality, and age relate to sale price.\n"
-        f"* The strongest positive correlations found were with: `OverallQual`, `GrLivArea`, `GarageArea`, `TotalBsmtSF`."
+        f"* We conducted a correlation study to evaluate how house size,  "
+        f"quality, and age relate to sale price.\n"
+        f"* The strongest positive correlations found were with:  "
+        f"`OverallQual`, `GrLivArea`, `GarageArea`, `TotalBsmtSF`."
     )
 
     # Heatmap toggle
     if st.checkbox("Show Correlation Heatmap"):
-        top_features = ['SalePrice', 'OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF', 'YearBuilt', 'YearRemodAdd']
+        top_features = ['SalePrice', 'OverallQual', 'GrLivArea', 'GarageArea',
+                        'TotalBsmtSF', 'YearBuilt', 'YearRemodAdd']
         corr = df[top_features].corr()
         fig, ax = plt.subplots(figsize=(8, 5))
         sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
@@ -57,15 +62,16 @@ def page_data_study_body():
     # Scatter: SalePrice vs GrLivArea
     if st.checkbox("Show SalePrice vs GrLivArea"):
         fig, ax = plt.subplots()
-        sns.scatterplot(data=df, x='GrLivArea', y='SalePrice', hue='OverallQual', palette='viridis')
+        sns.scatterplot(data=df, x='GrLivArea', y='SalePrice',
+                        hue='OverallQual', palette='viridis')
         ax.set_title("Sale Price vs GrLivArea")
         st.pyplot(fig)
 
     st.success("""
     **Conclusions:**
-    - Larger homes with higher material quality tend to sell for significantly more.
+    - Larger homes with higher material quality tend to sell for  more.
     - `OverallQual` is the top predictor, followed closely by `GrLivArea`.
     - Moderate correlations were observed for year built and renovations.
-    
+
     These insights shaped our feature selection for the ML model.
     """)

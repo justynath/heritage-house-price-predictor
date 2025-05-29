@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 def predict_sale_price(X_live, pipeline):
     """
     Accepts user input features and a trained pipeline.
