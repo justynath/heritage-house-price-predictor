@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score, mean_absolute_error
 
 
 def page_ML_pipeline_body():
@@ -10,12 +13,12 @@ def page_ML_pipeline_body():
 
     st.info("""
     This page explains how the final machine learning pipeline was built,
-     what features it used, and how well it performed.
-     It supports **Business Requirement 2** by ensuring the model
-     delivers reliable predictions.
+    what features it used, and how well it performed.
+    It supports **Business Requirement 2** by ensuring the model
+    delivers reliable predictions.
     """)
 
-    # Load saved model pipeline and training data
+    # Load model and data
     model_path = "outputs/ml_pipeline/predict_price/v1/regression_pipeline.pkl"
     model = joblib.load(model_path)
 
@@ -34,42 +37,61 @@ def page_ML_pipeline_body():
 
     st.markdown("""
     _These are the raw input features before transformation, encoding,
-     and selection.
+    and selection.
     The final features used for prediction may be reduced after correlation
-     filtering and model-based selection._
+    filtering and model-based selection._
     """)
 
-    # Feature importance (optional)
-    try:
-        st.markdown("#### Feature Importance")
-        st.image("outputs/ml_pipeline/predict_price/v1/feature_importance.png")
-    except FileNotFoundError:
-        st.warning(
-            "Feature importance image not found. "
-            "You can include this for extra insight.")
+    # === Coefficients for Linear Regression ===
+    if isinstance(model.named_steps["regressor"], LinearRegression):
+        st.markdown("#### Feature Importance via Coefficients (Linear Regression)")
+
+        # Rebuild preprocessor
+        preprocessor_steps = list(model.steps[:-1])
+        preprocessor = Pipeline(preprocessor_steps)
+        preprocessor.fit(X_train, y_train)
+
+        try:
+            feature_names = preprocessor.get_feature_names_out()
+        except:
+            feature_names = [f"Feature {i}" for i in range(preprocessor.transform(X_train).shape[1])]
+
+        coefs = model.named_steps["regressor"].coef_
+        coef_df = pd.DataFrame({'Feature': feature_names, 'Coefficient': coefs})
+        coef_df = coef_df.sort_values(by='Coefficient', key=abs, ascending=False)
+
+        # Plot
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x="Coefficient", y="Feature", data=coef_df.head(15), ax=ax)
+        ax.set_title("Top 15 Features by Coefficient Magnitude")
+        st.pyplot(fig)
+
+    else:
+        # Fallback for tree-based models
+        try:
+            st.markdown("#### Feature Importance")
+            st.image("outputs/ml_pipeline/predict_price/v1/feature_importance.png")
+        except FileNotFoundError:
+            st.warning("Feature importance image not found.")
 
     st.write("---")
 
-    # Display performance plots
+    # Actual vs Predicted Sale Price
     st.markdown("#### Actual vs Predicted Sale Price")
 
     col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("**Train Set**")
-        st.image(
-            "outputs/ml_pipeline/predict_price/v1/actual_vs_pred_train.png")
+        st.image("outputs/ml_pipeline/predict_price/v1/actual_vs_pred_train.png")
 
     with col2:
         st.markdown("**Test Set**")
-        st.image(
-            "outputs/ml_pipeline/predict_price/v1/actual_vs_pred_test.png")
+        st.image("outputs/ml_pipeline/predict_price/v1/actual_vs_pred_test.png")
 
     st.write("---")
 
-    # Compute R2 and MAE for both sets
-    from sklearn.metrics import r2_score, mean_absolute_error
-
+    # Model performance metrics
     preds_train = model.predict(X_train)
     preds_test = model.predict(X_test)
 
@@ -81,17 +103,15 @@ def page_ML_pipeline_body():
     st.markdown("#### Model Performance Summary")
 
     metrics = {
-        "Metric": ["R² Score (Train)", "R² Score (Test)", "MAE (Train)",
-                   "MAE (Test)"],
-        "Value": [f"{r2_train:.3f}", f"{r2_test:.3f}", f"${mae_train:,.0f}",
-                  f"${mae_test:,.0f}"]
+        "Metric": ["R² Score (Train)", "R² Score (Test)", "MAE (Train)", "MAE (Test)"],
+        "Value": [f"{r2_train:.3f}", f"{r2_test:.3f}", f"${mae_train:,.0f}", f"${mae_test:,.0f}"]
     }
     st.table(pd.DataFrame(metrics))
 
     st.success("""
     **Conclusion:**
     The pipeline achieves strong performance and meets the success criteria
-     defined with the client (R² ≥ 0.75).
+    defined with the client (R² ≥ 0.75).
     This validates that the model is fit for real-world prediction of house
-     sale prices in Ames, Iowa.
+    sale prices in Ames, Iowa.
     """)
