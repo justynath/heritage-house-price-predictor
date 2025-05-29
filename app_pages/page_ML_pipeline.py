@@ -78,7 +78,7 @@ def page_ML_pipeline_body():
     mae_train = mean_absolute_error(y_train, preds_train)
     mae_test = mean_absolute_error(y_test, preds_test)
 
-    st.markdown("#### 🧪 Model Performance Summary")
+    st.markdown("#### Model Performance Summary")
 
     metrics = {
         "Metric": ["R² Score (Train)", "R² Score (Test)", "MAE (Train)",

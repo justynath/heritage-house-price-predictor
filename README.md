@@ -281,20 +281,12 @@ For models that support tuning, the following hyperparameters were tested:
 ### Evaluation and Selection
 
 * **Performance Metric**: R² (coefficient of determination) was used for cross-validation scoring.
-* **Best Model**: The **Random Forest Regressor** achieved the highest cross-validated R² score and was therefore selected as the final model.
-* The selected hyperparameters for Random Forest were:
-
-```python
-{
-    'regressor__n_estimators': 150,
-    'regressor__max_depth': None,
-    'regressor__min_samples_split': 2
-}
-```
+* **Best Model**: The **Linear Regression** model achieved the highest cross-validated R² score with the simplest structure and no tuning required. It was therefore selected as the final model for both evaluation and deployment.
+* No hyperparameters were tuned for Linear Regression, as it performed best in its default configuration.
 
 This model performed robustly on both training and test sets, and its predictions were further evaluated using Actual vs Predicted plots and Mean Absolute Error (MAE).
 
-A simplified version of this model, using the top 5 most important features, was separately saved and deployed to the Streamlit dashboard for user interaction.
+A version of the Linear Regression model trained on the top 5 most predictive features (GrLivArea, OverallQual, GarageArea, TotalBsmtSF, YearBuilt) was saved and deployed to the Streamlit dashboard for real-time prediction. This simplified model preserves accuracy while enhancing usability and interpretability.
 
 [Back to Top](#top)
 
@@ -477,7 +469,7 @@ This page explains how the predictive model was built, what features it used, an
 * A **real-time performance table** displaying R² and MAE metrics, generated from live model inference using Streamlit.
 * A clear statement confirming that the model meets the success threshold (R² ≥ 0.75), validating it for real-world use.
 
-This combination of static visuals and interactive metrics supports Business Requirement 2 and satisfies LO6.4 and LO6.5.
+While several ensemble methods like Random Forest and XGBoost were evaluated, Linear Regression offered the best combination of accuracy, simplicity, and generalisability, especially when trained on the top features. It was therefore chosen for both model evaluation and dashboard deployment.
   
 ### Summary
 
