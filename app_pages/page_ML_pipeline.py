@@ -44,7 +44,8 @@ def page_ML_pipeline_body():
 
     # === Coefficients for Linear Regression ===
     if isinstance(model.named_steps["regressor"], LinearRegression):
-        st.markdown("#### Feature Importance via Coefficients (Linear Regression)")
+        st.markdown("#### Feature Importance via Coefficients"
+                    "(Linear Regression)")
 
         # Rebuild preprocessor
         preprocessor_steps = list(model.steps[:-1])
@@ -53,12 +54,15 @@ def page_ML_pipeline_body():
 
         try:
             feature_names = preprocessor.get_feature_names_out()
-        except:
-            feature_names = [f"Feature {i}" for i in range(preprocessor.transform(X_train).shape[1])]
+        except AttributeError:
+            feature_names = [f"Feature {i}" for i in range(
+                preprocessor.transform(X_train).shape[1])]
 
         coefs = model.named_steps["regressor"].coef_
-        coef_df = pd.DataFrame({'Feature': feature_names, 'Coefficient': coefs})
-        coef_df = coef_df.sort_values(by='Coefficient', key=abs, ascending=False)
+        coef_df = pd.DataFrame(
+            {'Feature': feature_names, 'Coefficient': coefs})
+        coef_df = coef_df.sort_values(
+            by='Coefficient', key=abs, ascending=False)
 
         # Plot
         fig, ax = plt.subplots(figsize=(10, 6))
@@ -70,7 +74,8 @@ def page_ML_pipeline_body():
         # Fallback for tree-based models
         try:
             st.markdown("#### Feature Importance")
-            st.image("outputs/ml_pipeline/predict_price/v1/feature_importance.png")
+            st.image(
+                "outputs/ml_pipeline/predict_price/v1/feature_importance.png")
         except FileNotFoundError:
             st.warning("Feature importance image not found.")
 
@@ -83,11 +88,13 @@ def page_ML_pipeline_body():
 
     with col1:
         st.markdown("**Train Set**")
-        st.image("outputs/ml_pipeline/predict_price/v1/actual_vs_pred_train.png")
+        st.image(
+            "outputs/ml_pipeline/predict_price/v1/actual_vs_pred_train.png")
 
     with col2:
         st.markdown("**Test Set**")
-        st.image("outputs/ml_pipeline/predict_price/v1/actual_vs_pred_test.png")
+        st.image(
+            "outputs/ml_pipeline/predict_price/v1/actual_vs_pred_test.png")
 
     st.write("---")
 
@@ -103,8 +110,11 @@ def page_ML_pipeline_body():
     st.markdown("#### Model Performance Summary")
 
     metrics = {
-        "Metric": ["R² Score (Train)", "R² Score (Test)", "MAE (Train)", "MAE (Test)"],
-        "Value": [f"{r2_train:.3f}", f"{r2_test:.3f}", f"${mae_train:,.0f}", f"${mae_test:,.0f}"]
+        "Metric": ["R² Score (Train)", "R² Score (Test)", "MAE (Train)",
+                   "MAE (Test)"],
+        "Value": [
+            f"{r2_train:.3f}", f"{r2_test:.3f}", f"${mae_train:,.0f}",
+            f"${mae_test:,.0f}"]
     }
     st.table(pd.DataFrame(metrics))
 

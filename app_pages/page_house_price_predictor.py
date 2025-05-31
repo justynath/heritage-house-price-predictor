@@ -13,18 +13,23 @@ def page_house_price_predictor_body():
     )
 
     # Load simplified model and selected features
-    model = load_pkl_file("outputs/ml_pipeline/predict_price/v1/regression_pipeline_simple.pkl")
-    selected_features = ['GrLivArea', 'OverallQual', 'GarageArea', 'TotalBsmtSF', 'YearBuilt']
+    model = load_pkl_file(
+        "outputs/ml_pipeline/predict_price/v1/regression_pipeline_simple.pkl")
+    selected_features = [
+        'GrLivArea', 'OverallQual', 'GarageArea', 'TotalBsmtSF', 'YearBuilt']
 
     # Load and filter inherited houses
     inherited_df = load_inherited_houses()[selected_features]
 
     # Dropdown to select one of Lydia's inherited houses
     house_names = [f"Lydia's House {i+1}" for i in range(len(inherited_df))]
-    selected_house = st.selectbox("Or load one of Lydia's inherited houses:", ["Select a house..."] + house_names)
+    selected_house = st.selectbox(
+        "Or load one of Lydia's inherited houses:", [
+            "Select a house..."] + house_names)
 
     # Determine defaults based on dropdown
-    defaults = inherited_df.iloc[house_names.index(selected_house)] if selected_house != "Select a house..." else None
+    defaults = inherited_df.iloc[house_names.index(
+        selected_house)] if selected_house != "Select a house..." else None
 
     # Create form input fields
     col1, col2 = st.columns(2)
@@ -55,3 +60,4 @@ def page_house_price_predictor_body():
     if st.button("💡 Predict Sale Price"):
         sale_price = model.predict(X_live)[0]
         st.success(f"🏡 Estimated Sale Price: **${sale_price:,.0f}**")
+        

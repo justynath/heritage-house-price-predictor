@@ -27,6 +27,7 @@ The project follows the **CRISP-DM (Cross Industry Standard Process for Data Min
 * [Dashboard Design](#dashboard-design-streamlit-app-user-interface)
 * [Deployment](#deployment)
 * [Main Libraries](#main-data-analysis-and-machine-learning-libraries)
+* [Testing and Validation](#testing-and-validation)
 * [Credits](#credits)
 
 ---
@@ -80,6 +81,88 @@ She found a **public dataset of Ames house sales** and has asked you, as a good 
 
 2. **Price Prediction Model:**  
    The client wants to **predict the sale price** of her four inherited homes and be able to predict prices for **other homes** in Ames using a trained machine learning model.
+
+[Back to Top](#top)
+
+---
+
+## Agile Workflow <a name="agile-workflow"></a>
+
+To manage this project effectively, I used an agile approach based on the **CRISP-DM methodology**, supported by:
+
+* **Epics** and **User Stories** to break the project into actionable goals  
+* A visual **[Kanban board](https://github.com/users/justynath/projects/11/views/1)** to track progress and maintain focus throughout the project  
+* **MoSCoW prioritisation** to focus on what matters most  
+
+### **EPIC 1: Business & Data Understanding**
+
+Define the business problem and explore the dataset to ensure it supports the ML goal.
+
+* **USER STORY 1: Define business objectives and success criteria**  
+  *Priority: Must*  
+  *BR Mapping: Supports BR 1 & 2*  
+  As a data practitioner, I want to define the business goals so that I can align the ML system with the client's needs.
+
+* **USER STORY 2: Explore and understand the dataset**  
+  *Priority: Must*  
+  *BR Mapping: Supports BR 1*  
+  As a data practitioner, I want to explore the dataset to check if it can answer the business question.
+
+### **EPIC 2: Data Preparation**
+
+Clean and transform the dataset to make it ready for machine learning.
+
+* **USER STORY 3: Clean and structure the data**  
+  *Priority: Must*  
+  *BR Mapping: Supports BR 1 & 2*  
+  As a data practitioner, I want to clean and structure the dataset so that it can be reliably used in modelling.
+
+* **USER STORY 4: Engineer new features for modelling**  
+  *Priority: Should*  
+  *BR Mapping: Supports BR 1 & 2*  
+  As a data practitioner, I want to create new features that improve model performance.
+
+### **EPIC 3: Modelling & Evaluation**
+
+Build, train, and evaluate models to address the business objective.
+
+* **USER STORY 5: Build and evaluate ML models**  
+  *Priority: Must*  
+  *BR Mapping: Supports BR 2*  
+  As a data practitioner, I want to build and evaluate models so that I can predict house prices accurately.
+
+* **USER STORY 6: Improve model with hyperparameter tuning**  
+  *Priority: Should*  
+  *BR Mapping: Supports BR 2*  
+  As a data practitioner, I want to optimise the model using tuning to improve predictive performance.
+
+### **EPIC 4: Deployment & Dashboard**
+
+Develop and deploy a Streamlit dashboard to present insights and predictions.
+
+* **USER STORY 7: Build a dashboard for prediction and insights**  
+  *Priority: Must*  
+  *BR Mapping: Supports BR 2*  
+  As a stakeholder, I want a dashboard where I can input house details and get sale price predictions.
+
+* **USER STORY 8: Add visualisations and interactivity to dashboard**  
+  *Priority: Should*  
+  *BR Mapping: Supports BR 1 & 2*  
+  As a stakeholder, I want visual insights and interactive features to explore data and predictions.
+
+### **EPIC 5: Documentation & Review**
+
+Document the project comprehensively and ensure it is reproducible and understandable.
+
+* **USER STORY 9: Write comprehensive project documentation**  
+  *Priority: Must*  
+  *BR Mapping: Supports BR 1 & 2*  
+  As a reviewer, I want to understand the full project by reading the README file.
+
+* **USER STORY 10: Explain and validate project hypothesis**  
+  *Priority: Should*  
+  *BR Mapping: Supports BR 1 & 2*  
+  As a reviewer, I want to understand the hypothesis and see how it's supported by the model results.
 
 [Back to Top](#top)
 
@@ -287,87 +370,6 @@ For models that support tuning, the following hyperparameters were tested:
 This model performed robustly on both training and test sets, and its predictions were further evaluated using Actual vs Predicted plots and Mean Absolute Error (MAE).
 
 A version of the Linear Regression model trained on the top 5 most predictive features (GrLivArea, OverallQual, GarageArea, TotalBsmtSF, YearBuilt) was saved and deployed to the Streamlit dashboard for real-time prediction. This simplified model preserves accuracy while enhancing usability and interpretability.
-
-[Back to Top](#top)
-
----
-
-## Agile Workflow <a name="agile-workflow"></a>
-
-To manage this project effectively, I used an agile approach based on the **CRISP-DM methodology**, supported by:
-
-* **Epics** and **User Stories** to break the project into actionable goals
-* A visual **[Kanban board](https://github.com/users/justynath/projects/11/views/1)** to track progress and maintain focus throughout the project
-* **MoSCoW prioritisation** to focus on what matters most
-
-### Epics
-
-* **EPIC 1: Business & Data Understanding**  
-  Define the business problem and explore the dataset to ensure it supports the ML goal.
-
-* **EPIC 2: Data Preparation**  
-  Clean and transform the dataset to make it ready for machine learning.
-
-* **EPIC 3: Modelling & Evaluation**  
-  Build, train, and evaluate models to address the business objective.
-
-* **EPIC 4: Deployment & Dashboard**  
-  Develop and deploy a Streamlit dashboard to present insights and predictions.
-
-* **EPIC 5: Documentation & Review**  
-  Document the project comprehensively and ensure it is reproducible and understandable.
-
-### User Stories
-
-* **USER STORY 1: Define business objectives and success criteria**
-  * Epic: Business & Data Understanding
-  * Priority: Must
-  * As a data practitioner, I want to define the business goals so that I can align the ML system with the client's needs.
-
-* **USER STORY 2: Explore and understand the dataset**  
-  * Epic: Business & Data Understanding
-  * Priority: Must
-  * As a data practitioner, I want to explore the dataset to check if it can answer the business question.
-
-* **USER STORY 3: Clean and structure the data**  
-  * Epic: Data Preparation
-  * Priority: Must
-  * As a data practitioner, I want to clean and structure the dataset so that it can be reliably used in modelling.
-
-* **USER STORY 4: Engineer new features for modelling**  
-  * Epic: Data Preparation
-  * Priority: Should
-  * As a data practitioner, I want to create new features that improve model performance.
-
-* **USER STORY 5: Build and evaluate ML models**  
-  * Epic: Modelling & Evaluation
-  * Priority: Must
-  * As a data practitioner, I want to build and evaluate models so that I can predict house prices accurately.
-
-* **USER STORY 6: Improve model with hyperparameter tuning**  
-  * Epic: Modelling & Evaluation
-  * Priority: Should
-  * As a data practitioner, I want to optimise the model using tuning to improve predictive performance.
-
-* **USER STORY 7: Build a dashboard for prediction and insights**  
-  * Epic: Deployment & Dashboard
-  * Priority: Must
-  * As a stakeholder, I want a dashboard where I can input house details and get sale price predictions.
-
-* **USER STORY 8: Add visualisations and interactivity to dashboard**  
-  * Epic: Deployment & Dashboard
-  * Priority: Should
-  * As a stakeholder, I want visual insights and interactive features to explore data and predictions.
-
-* **USER STORY 9: Write comprehensive project documentation**  
-  * Epic: Documentation & Review
-  * Priority: Must
-  * As a reviewer, I want to understand the full project by reading the README file.
-
-* **USER STORY 10: Explain and validate project hypothesis**
-  * Epic: Documentation & Review
-  * Priority: Should
-  * As a reviewer, I want to understand the hypothesis and see how it's supported by the model results.
 
 [Back to Top](#top)
 
@@ -616,6 +618,64 @@ Some packages were included during development for exploratory work or advanced 
 
 ---
 
+## Testing and Validation <a name="testing-and-validation"></a>
+
+### Manual Testing
+
+#### Overview
+
+Manual testing was conducted for **User Stories 7 and 8**, which relate to the interactive dashboard. Other stories (e.g., data understanding, modelling, and documentation) were validated through deliverables such as notebooks, documented analysis, and visual outputs.
+
+#### **User Story 7: As a stakeholder, I want a dashboard where I can input house details and get sale price predictions.**
+
+| Feature                    | Action                                                | Expected Result                                      | Actual Result           |
+|----------------------------|--------------------------------------------------------|------------------------------------------------------|--------------------------|
+| Prediction page            | Navigate to "💰 House Price Predictor" via sidebar     | Page loads successfully                              | ✅ Functions as intended |
+| Load inherited house       | Select “Lydia’s House 1” from dropdown                 | Fields populate with default values                  | ✅ Functions as intended |
+| Manual input of features   | Enter custom values for all input fields              | Inputs update correctly                              | ✅ Functions as intended |
+| Generate prediction        | Click “💡 Predict Sale Price”                          | Estimated price displayed on screen                  | ✅ Functions as intended |
+
+---
+
+#### **User Story 8: As a stakeholder, I want visual insights and interactive features to explore data and predictions.**
+
+| Feature                        | Action                                                | Expected Result                                            | Actual Result           |
+|--------------------------------|--------------------------------------------------------|------------------------------------------------------------|--------------------------|
+| Data Study page                | Navigate via sidebar to "Data Study"                  | Page loads with info and section headers                   | ✅ Functions as intended |
+| Inspect dataset                | Check "Inspect Dataset" checkbox                      | Table with first 10 rows is displayed                      | ✅ Functions as intended |
+| View correlation heatmap       | Tick "Show Correlation Heatmap"                       | Correlation matrix displays with annotated values          | ✅ Functions as intended |
+| View feature distributions     | Tick "Show Feature Distributions"                     | Histograms with KDE for each feature appear                | ✅ Functions as intended |
+| Scatterplot for GrLivArea     | Tick "Show SalePrice vs GrLivArea"                    | Interactive scatterplot appears                            | ✅ Functions as intended |
+
+| Feature                        | Action                                                | Expected Result                                            | Actual Result           |
+|--------------------------------|--------------------------------------------------------|------------------------------------------------------------|--------------------------|
+| Hypotheses & Validation page   | Navigate to "Hypotheses and Validation"               | Page loads with markdown summaries and data table          | ✅ Functions as intended |
+| Validation table               | Scroll to validation summary                          | Table of hypothesis results is clearly displayed           | ✅ Functions as intended |
+| Correlation heatmap (optional) | Check "Show correlation heatmap of key features"      | Heatmap displays with correct variable correlations        | ✅ Functions as intended |
+
+---
+
+#### Summary
+
+* All tested dashboard pages functioned **as expected** across both technical and non-technical features.
+* Inputs, visualisations, and interactivity worked correctly without errors.
+* Business Requirements 1 and 2 were fully supported through these interfaces.
+
+> For Jupyter notebooks and pipeline code, success was determined by correct outputs and metrics (e.g., R² scores, coefficient analysis) rather than UI testing.
+
+### Validation
+
+All code in the `app_pages` and `scr` directories was validated using [Code Institute’s PEP8 Linter](https://pep8ci.herokuapp.com/) and conforms to PEP8 style guidelines.
+
+An exception was flagged in `app.py`:
+
+* `E402: module level import not at top of file`  
+  This warning appears because `st.set_page_config()` must be called **before** any other Streamlit code (including imports that use `st`). To ensure proper configuration of the dashboard layout and title, this function is intentionally placed at the top of the script — ahead of other imports.
+
+Aside from this necessary exception, the rest of the project complies with PEP8 standards.
+
+---
+
 ## Credits <a name="credits"></a>
 
 ### Content
@@ -628,5 +688,9 @@ Some packages were included during development for exploratory work or advanced 
 * I used **emoji icons** in the dashboard interface, enabled via MacOS keyboard shortcuts.
 * The **business case** and user story were adapted from the Handbook: Heritage Housing Issues provided by Code Institute.
 * Some code snippets and functions were adapted from the **Code Institute Data Analysis & Machine Learning Toolkit**.
+
+### Acknowledgements 
+
+* Many thanks to my mentor Mo Shami, for his support and guidance on the execution of the project.
 
 [Back to Top](#top)
